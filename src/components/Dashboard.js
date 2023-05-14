@@ -4,6 +4,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Sidebar1 from "./Sidebar1";
 import NewPost from "./Newpost";
 import ToDo from "./ToDo"
+import './Dashboard.css';
+import Friends from "./Friends";
+
 function Dashboard() {
   const [data, setData] = useState([]);
   const [dataLength, setDataLength] = useState(0);
@@ -43,17 +46,14 @@ function Dashboard() {
   };
 
   return (
-    <>
-      <Sidebar1 current= "dashboard"/>
+    <div className="dasboardContainer">
+      <Sidebar1 current="dashboard" />
       <div className="left-data">
-      <NewPost />
+        <NewPost />
 
       </div>
-      
-      <div className="right-data">
 
-        <ToDo />
-      </div>
+
       <InfiniteScroll
         dataLength={data.length}
         next={fetchData}
@@ -84,7 +84,13 @@ function Dashboard() {
           })}
         </div>
       </InfiniteScroll>
-    </>
+
+      <div className="right-data">
+
+        <ToDo />
+        <Friends />
+      </div>
+    </div>
   );
 }
 
