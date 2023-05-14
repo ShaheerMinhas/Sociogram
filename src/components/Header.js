@@ -6,52 +6,41 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
+import SearchBar from './searchbar'
 import { Link } from 'react-router-dom';
 const Header = () => {
   const[mystyle,setmystyle]=useState({
     colour:'white',
-    backgroundColor:'dodgerblue' 
+    backgroundColor:'dodgerblue',
+    position:'fixed',
+    top:'0',
+    zIndex:"10"
     
   })
   const togglestyle=()=>
   {
     if(mystyle.backgroundColor=='dodgerblue')
     {
-      setmystyle({
-        colour:'white',
-       backgroundColor:"black"
-       })
+      setmystyle({...mystyle,backgroundColor:'black'})
     }
     else if(mystyle.backgroundColor=='black'){
       
-      setmystyle({
-        colour:'white',
-       backgroundColor:"indigo"
-       })
+      setmystyle({...mystyle,backgroundColor:'indigo'})
 
     }
     else if(mystyle.backgroundColor=='indigo'){
       
-      setmystyle({
-        colour:'white',
-       backgroundColor:"orange"
-       })
+      setmystyle({...mystyle,backgroundColor:'orange'})
 
     }
     else if(mystyle.backgroundColor=='orange'){
       
-      setmystyle({
-        colour:'white',
-       backgroundColor:"maroon"
-       })
+      setmystyle({...mystyle,backgroundColor:'maroon'})
 
     }
     else {
       
-      setmystyle({
-        colour:'white',
-       backgroundColor:"dodgerblue"
-       })
+      setmystyle({...mystyle,backgroundColor:'dodgerblue'})
 
     }
   
@@ -69,17 +58,7 @@ const Header = () => {
         
 
 
-        <Container  >
-          <Form id="searchbar">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className='searchff'
-
-            />
-
-          </Form>
-        </Container>
+        <SearchBar/>
 
         <FeedBack />
         <Button onClick={togglestyle} variant="primary" id="button-28">Theme</Button>
@@ -97,8 +76,28 @@ function FeedBack() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [email, setEmail] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const handleSaveChanges = () => {
+    const data = { email: email, feedback: feedback };
+  
+    fetch('http://localhost:5000/addfeedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        handleClose();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
   return (
     <>
+
       <Button variant="primary" onClick={handleShow} id="button-28">
         FeedBack
       </Button>
@@ -115,6 +114,8 @@ function FeedBack() {
                 type="email"
                 placeholder="name@example.com"
                 autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -122,7 +123,12 @@ function FeedBack() {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Give Feedback</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -130,8 +136,8 @@ function FeedBack() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={handleSaveChanges}>
+            SEND
           </Button>
         </Modal.Footer>
       </Modal>

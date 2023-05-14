@@ -1,0 +1,32 @@
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+.card{
+    max-width: 39vw;
+    height: auto;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+.info{
+    /* margin: 0.5rem; */
+}
+.PFP{
+    width:3vw;
+    border-radius:50%;
+    /* padding-top:auto; */
+    /* padding-bottom: auto; */
+}
+#username{
+    /* margin: 0 !important; */
+}
+#date{
+    /* margin: 0 !important; */
+}
+.card-text{
+    /* margin: 0.5rem; */
+}
+.card-img-top{
+    /* margin: -0.5rem; */
+    border-radius: 0;
+}

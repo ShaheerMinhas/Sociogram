@@ -3,7 +3,7 @@ import MAinimage from './MainImage'
 import LoginSignupBox from './LoginSignupbox'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-
+import Signup from './LogZ'
 import Header from './Header'
 const LoginSignupPage = () => {
   
@@ -14,7 +14,7 @@ const LoginSignupPage = () => {
     <div className="container mt-3">
         <section className='d-flex justify-content-between'>
                   <div className="left-data mt-5" style={{width:"100%"}}>
-                     <LoginSignupBox />
+                    <LoginSignupBox />
                   </div>
                   <div className="mt-5">
                     
