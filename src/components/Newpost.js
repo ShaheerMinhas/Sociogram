@@ -11,6 +11,33 @@ const NewPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add logic to handle submit
+    e.preventDefault();
+
+    const userId = localStorage.getItem('logid'); 
+    const userName = localStorage.getItem('logname'); 
+
+    if(postBody==='')return alert('Please write something to post');
+    // const userName = "John Doe";
+    // const postTxt = content;
+    // console.log('i happen')
+
+    fetch("http://localhost:5000/addpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({postBody,userId, userName}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Post Added Successfully");
+        setPostBody("");
+        console.log(data);
+      })
+      .catch((err) =>  {
+        console.error(err);
+      });
+
   };
 
   return (

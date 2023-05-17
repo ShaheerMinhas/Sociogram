@@ -25,6 +25,11 @@ const Header = () => {
     }
     else if(mystyle.backgroundColor=='black'){
       
+      setmystyle({...mystyle,backgroundColor:'green'})
+
+    }
+    else if(mystyle.backgroundColor=='green'){
+      
       setmystyle({...mystyle,backgroundColor:'indigo'})
 
     }

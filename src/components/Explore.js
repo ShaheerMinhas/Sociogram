@@ -23,12 +23,12 @@ const Explore = () => {
       }, []);
 
       const getImgURL = () => {
-        let options = [400,500,600,700,800,900,300];
-        let num = Math.floor(Math.random() * 7);
-        let x = options[num];
-        num = Math.floor(Math.random() * 7);
-        let y = options[num];
-        return `https://picsum.photos/${x}/${y}`
+         let options = [400,420,450,500];
+         let num = Math.floor(Math.random() * 4);
+         let x = options[num];
+        //  num = Math.floor(Math.random() * 7);
+        //  let y = options[num];
+        return `https://picsum.photos/${x}`
       };
 
     return (

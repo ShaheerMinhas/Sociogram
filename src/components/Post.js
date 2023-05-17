@@ -51,7 +51,7 @@ function Post(props) {
       )}
       <div className="card-body">
         <div className="stats row justify-content-between">
-          <div className="col likes">{postLikes}</div>
+          <div className="col likes"> <p>{postLikes} likes</p></div>
         </div>
         <hr />
         <div className="buttons row justify-content-evenly">

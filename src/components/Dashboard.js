@@ -40,6 +40,15 @@ function Dashboard() {
     likes: 4,
     shares: 5,
   };
+  const getImgURL = () => {
+    let options = [400,420,450,500];
+    let num = Math.floor(Math.random() * 4);
+    let x = options[num];
+   //  num = Math.floor(Math.random() * 7);
+   //  let y = options[num];
+   return `https://picsum.photos/${x}`
+ };
+
 
   const fetchData = () => {
     getData();
@@ -47,13 +56,11 @@ function Dashboard() {
 
   return (
     <div className="dasboardContainer">
-      <Sidebar1 current="dashboard" />
       <div className="left-data">
-        <NewPost />
-
+        <Sidebar1 current="dashboard" />
       </div>
-
-
+      <div className="mid-data">
+      <NewPost />
       <InfiniteScroll
         dataLength={data.length}
         next={fetchData}
@@ -72,7 +79,7 @@ function Dashboard() {
                   key={element.id}
                   id={element.id}
                   user={element.userName}
-                  imageURL={null}
+                  imageURL={getImgURL()}
                   content={element.postTxt}
                   stats={stats}
                   date={element.uploadDate}
@@ -84,6 +91,7 @@ function Dashboard() {
           })}
         </div>
       </InfiniteScroll>
+      </div>
 
       <div className="right-data">
 

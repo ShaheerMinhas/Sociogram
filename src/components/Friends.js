@@ -6,13 +6,26 @@ import React, { useEffect, useState } from 'react'
 const Friends = () => {
     const [friendList, setFriendList] = useState([])
     const friends = async () => {
-        const res = await fetch(`http://localhost:3000/friendpeople?userId=${localStorage.getItem('logid')}`)
+        console.log('friends')
+        // const res = await fetch(`http://localhost:5000/friendpeople?userId=${localStorage.getItem('logid')}`,
+        const res = await fetch(`http://localhost:5000/friendpeople`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId: localStorage.getItem('logid')
+                })
+
+            }
+        )
         const data = await res.json()
+        console.log({ data })
         setFriendList(data)
     }
     useEffect(() => {
         friends()
-
     }, [])
     return (
         <div className='friendContainer'>
@@ -24,7 +37,8 @@ const Friends = () => {
                     return (
                         <li key={friend.id}>
                             <div>
-                                <h3>{friend.name}</h3>
+                            <img src='https://picsum.photos/seed/picsum/300/500' alt="Avatar" className="imgdp" />
+                                <h3>{friend.username}</h3>
                                 <p>{friend.email}</p>
                             </div>
                         </li>

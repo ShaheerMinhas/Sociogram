@@ -66,7 +66,7 @@ function Signupform() {
                     <Form.Control type="text" name='name' value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter Your Name" />
 
                 </Form.Group>
-                <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                <Form.Group className="mb-2 col-sm-6" controlId="formBasicEmail">
 
                     <Form.Control type="email" name='email' placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
@@ -130,7 +130,28 @@ function Signinform() {
         }
         
     };
-
+    const handleForget = async (e) => {
+        e.preventDefault();
+        const response = await fetch('http://localhost:5000/forgetpassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+            })
+        });
+        const res = await response.json();
+        if (res.status) {
+            alert('Login Successful',res.user.password);
+            setIsLoggedIn(true);
+            setPassword(res.user.password);
+        }
+        else {
+            alert('Enter Email');
+        }
+        
+    };
     return (
         <div className="left-data mt-5" style={{ width: "100%" }}>
             <h3 className='text-centre col-lg-6'>Sign In</h3>
@@ -143,6 +164,10 @@ function Signinform() {
                 </Form.Group>
                 <Button id="button-81" variant="primary" type="submit" className="mb-3 ml-4 col-lg-5" style={{}}>
                     LogIn
+                </Button>
+                <br/>
+                <Button variant="primary" onClick={handleForget} className="mb-3 ml-4 col-lg-3" style={{}}>
+                    Forget Password
                 </Button>
             </Form>
         </div>
